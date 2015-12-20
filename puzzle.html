@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Puzzle</title>
+    <script type="text/javascript">
+        var temp = 1;
+        var list = [];
+        function submit() {
+            var outerValue = document.getElementById('maxRange').value;
+            for (var i = 1; i <= outerValue; i++) {
+                list.push(i); //Creating an array of numbers with range from 1 to count of people.
+            }
+            remove_elements();
+        }
+        function remove_elements() {
+            for (var i = 0; i < list.length; i++) { //iterate the loop for each element of an array
+                if (temp == 0) {
+                    list.splice(i,1);
+                    i--; // decrementing index as splice will reduce all the next elements index by 1. Should not skip the next element
+                    temp = 1;
+                } else {
+                    temp = 0;
+                }
+            }
+            if (list.length != 1) {
+                remove_elements(); //calling remove_elements function recursively until array is left with only one element
+            } else {
+                var solution = 'Count of the person who remains at last is: '+ list[0];
+                document.getElementById("Solution").innerHTML = solution;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <p>Enter the number of people standing in circle:
+        <input id="maxRange" type="text"/>
+        <input type="button" value="Click to solve the puzzle" onclick="submit()" />
+        </p>
+        <p id="Solution"></p>
+    </div>
+</body>
+</html>
